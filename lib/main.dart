@@ -112,7 +112,7 @@ class _HomeState extends State<Home> {
                       child: const Icon(Icons.call, color: Colors.black, size: 30),
                     ),
                     const SizedBox(width: 16),
-                    const Text("โทรศัพท์ 076-211343,076-221679 โทรสาร 076-212729", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700))
+                    const Text("โทรศัพท์ 076-211343,076-221679 โทรสาร 076-212729 Test", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700))
                   ],
                 )
               )
