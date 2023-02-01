@@ -112,15 +112,107 @@ class _HomeState extends State<Home> {
                       child: const Icon(Icons.call, color: Colors.black, size: 30),
                     ),
                     const SizedBox(width: 16),
-                    const Text("โทรศัพท์ 076-211343,076-221679 โทรสาร 076-212729 Test", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700))
+                    const Text("โทรศัพท์ 076-211343,076-221679 โทรสาร 076-212729", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700))
                   ],
                 )
               )
             ],
           ),
 
+          Padding(
+            padding: const EdgeInsets.only(top: 71),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 340),
+                  child: Container(
+                    height: 595,
+                    width: 546,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 164, 188, 205),
+                      borderRadius: BorderRadius.circular(50.0)
+                    ),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 28),
+                            child: Container(
+                              height: 72,
+                              width: 492,
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 255, 175, 0),
+                                borderRadius: BorderRadius.circular(50.0)
+                              ),
+                              child: const Center(child: Text("บันทึกหลังการสอน",style: TextStyle(color: Color.fromARGB(255, 63, 63, 63), fontSize: 40, fontWeight: FontWeight.w700))),
+                            ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 17),
+                          child: Container(
+                            height: 437,
+                            width: 437,
+                            decoration: BoxDecoration(
+                              image: const DecorationImage(
+                                image: AssetImage("assets/after_teaching.png"),
+                                fit: BoxFit.cover,
+                              ),
+                              borderRadius: BorderRadius.circular(50.0)
+                            ),
+                            child: null
+                          ),
+                        ),
+                      ],
+                    )
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 156),
+                  child: Container(
+                    height: 595,
+                    width: 546,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 164, 188, 205),
+                      borderRadius: BorderRadius.circular(50.0)
+                    ),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 28),
+                          child: Container(
+                            height: 72,
+                            width: 492,
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 255, 175, 0),
+                              borderRadius: BorderRadius.circular(50.0)
+                            ),
+                            child: const Center(child: Text("แผนการสอน",style: TextStyle(color: Color.fromARGB(255, 63, 63, 63), fontSize: 40, fontWeight: FontWeight.w700))),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 17),
+                          child: Container(
+                            height: 437,
+                            width: 437,
+                            decoration: BoxDecoration(
+                              image: const DecorationImage(
+                                image: AssetImage("assets/plan.png"),
+                                fit: BoxFit.cover,
+                              ),
+                              borderRadius: BorderRadius.circular(50.0)
+                            ),
+                            child: null
+                          ),
+                        ),
+                      ],
+                    )
+                  ),
+                ),
+              ],
+            ),
+          ),
+
           Container(
-            margin: const EdgeInsets.only(top: 400),
+            margin: const EdgeInsets.only(top: 115),
             alignment: Alignment.center,
             color: const Color.fromARGB(255, 18, 24, 27),
             height: 192,
