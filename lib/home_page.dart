@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:stupid_website/main.dart';
 import 'package:stupid_website/widget/button.dart';
+
 final List<String> imgList = [
   'imageslide.png',
   'banner.png',
@@ -52,7 +54,7 @@ class _HomepageState extends State<Homepage> {
         actions: [
           Button(
             onClick: () {
-              Navigator.push(context,MaterialPageRoute(builder: (context) => const Homepage()),);
+              Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation) => const Home()));
             },
             color: Colors.white,
             size: const Size(200, 0),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stupid_website/home_page.dart';
 import 'package:stupid_website/widget/button.dart';
 
 void main() {
@@ -13,7 +14,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'PTC',
       theme: ThemeData.light(),
-      home: const Home(),
+      home: const Homepage(),
     );
   }
 }
@@ -26,6 +27,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int _currentTools = 0;
+  List _hover = [false, false, false, false];
+  List _bannerText = ["หน้าแรก", "โครงสร้างองค์กร", "ข้อมูลการใช้งาน", "สรุปสถิติส่งแผนการสอน"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,23 +64,20 @@ class _HomeState extends State<Home> {
             )
           ],
         ),
-        actions: [
-          Button(
-            onClick: () {},
-            color: Colors.white,
-            size: const Size(200, 0),
-            margin: const EdgeInsets.only(top: 10.0, bottom: 10.0, right: 30),
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Image.asset("assets/google_logo.png", height: 40, width: 40, fit: BoxFit.contain),
-                const Text("ลงชื่อเข้าสู่ระบบ", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18, color: Colors.black))
-              ],
-            ),
+        actions: List.generate(_hover.length, (index) => MouseRegion(
+          cursor: SystemMouseCursors.click,
+          onEnter: (event) => setState(() => _hover[index] = true),
+          onExit: (event) => setState(() => _hover[index] = false),
+          child: GestureDetector(
+            onTap: () {
+              if (_currentTools == index) {
+                return ;
+              }
+              setState(() => _currentTools = index);
+            },
+            child: Align(alignment: Alignment.center, child: Text(_bannerText[index] + "    ", style: TextStyle(color: _currentTools == index ? const Color.fromARGB(255, 255, 175, 0) : Colors.white, fontWeight: FontWeight.w600, fontSize: 20))),
           ),
-        ],
+        )),
       ),
 
       body: ListView(
@@ -118,24 +119,70 @@ class _HomeState extends State<Home> {
               )
             ],
           ),
-
-          Padding(
-            padding: const EdgeInsets.only(top: 71),
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 340),
-                  child: Container(
-                    height: 595,
-                    width: 546,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 164, 188, 205),
-                      borderRadius: BorderRadius.circular(50.0)
+          ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          
+          if (_currentTools == 0) ... [
+            Padding(
+              padding: const EdgeInsets.only(top: 71),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 340),
+                    child: Container(
+                      height: 595,
+                      width: 546,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 164, 188, 205),
+                        borderRadius: BorderRadius.circular(50.0)
+                      ),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 28),
+                              child: Container(
+                                height: 72,
+                                width: 492,
+                                decoration: BoxDecoration(
+                                  color: const Color.fromARGB(255, 255, 175, 0),
+                                  borderRadius: BorderRadius.circular(50.0)
+                                ),
+                                child: const Center(child: Text("บันทึกหลังการสอน",style: TextStyle(color: Color.fromARGB(255, 63, 63, 63), fontSize: 40, fontWeight: FontWeight.w700))),
+                              ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 17),
+                            child: Container(
+                              height: 437,
+                              width: 437,
+                              decoration: BoxDecoration(
+                                image: const DecorationImage(
+                                  image: AssetImage("assets/after_teaching.png"),
+                                  fit: BoxFit.cover,
+                                ),
+                                borderRadius: BorderRadius.circular(50.0)
+                              ),
+                              child: null
+                            ),
+                          ),
+                        ],
+                      )
                     ),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 28),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 156),
+                    child: Container(
+                      height: 595,
+                      width: 546,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 164, 188, 205),
+                        borderRadius: BorderRadius.circular(50.0)
+                      ),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 28),
                             child: Container(
                               height: 72,
                               width: 492,
@@ -143,74 +190,112 @@ class _HomeState extends State<Home> {
                                 color: const Color.fromARGB(255, 255, 175, 0),
                                 borderRadius: BorderRadius.circular(50.0)
                               ),
-                              child: const Center(child: Text("บันทึกหลังการสอน",style: TextStyle(color: Color.fromARGB(255, 63, 63, 63), fontSize: 40, fontWeight: FontWeight.w700))),
+                              child: const Center(child: Text("แผนการสอน",style: TextStyle(color: Color.fromARGB(255, 63, 63, 63), fontSize: 40, fontWeight: FontWeight.w700))),
                             ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 17),
-                          child: Container(
-                            height: 437,
-                            width: 437,
-                            decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                image: AssetImage("assets/after_teaching.png"),
-                                fit: BoxFit.cover,
-                              ),
-                              borderRadius: BorderRadius.circular(50.0)
-                            ),
-                            child: null
                           ),
-                        ),
-                      ],
-                    )
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 156),
-                  child: Container(
-                    height: 595,
-                    width: 546,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 164, 188, 205),
-                      borderRadius: BorderRadius.circular(50.0)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 17),
+                            child: Container(
+                              height: 437,
+                              width: 437,
+                              decoration: BoxDecoration(
+                                image: const DecorationImage(
+                                  image: AssetImage("assets/plan.png"),
+                                  fit: BoxFit.cover,
+                                ),
+                                borderRadius: BorderRadius.circular(50.0)
+                              ),
+                              child: null
+                            ),
+                          ),
+                        ],
+                      )
                     ),
-                    child: Column(
+                  ),
+                ],
+              ),
+            ),
+          ] else if (_currentTools == 1) ... [
+            const SizedBox( height: 200 ),
+          ] else if (_currentTools == 2) ... [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text("ข้อมูลการใช้งาน", style: TextStyle(color: Colors.grey[600], fontSize: 20, fontWeight: FontWeight.w600)),
+                  const SizedBox(height: 16.0),
+                  Container(
+                    padding: const EdgeInsets.all(16.0),
+                    //color: Colors.white,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16.0)
+                    ),
+                    child: Table(
+                      columnWidths: const {
+                        0: FlexColumnWidth(1),
+                        1: FlexColumnWidth(3),
+                        2: FlexColumnWidth(5),
+                        3: FlexColumnWidth(3),
+                        4: FlexColumnWidth(3),
+                      },
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 28),
-                          child: Container(
-                            height: 72,
-                            width: 492,
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 255, 175, 0),
-                              borderRadius: BorderRadius.circular(50.0)
-                            ),
-                            child: const Center(child: Text("แผนการสอน",style: TextStyle(color: Color.fromARGB(255, 63, 63, 63), fontSize: 40, fontWeight: FontWeight.w700))),
+                        TableRow(
+                          decoration: const BoxDecoration(
+                            color: Color.fromARGB(255, 30, 38, 57),
                           ),
+                          children: [
+                            Container(padding: const EdgeInsets.all(8.0), alignment: Alignment.center, decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 2)), child: const Text("ลำดับ", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600))),
+                            Container(padding: const EdgeInsets.all(8.0), alignment: Alignment.center, decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 2)), child: const Text("วัน-เดือน-ปี", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600))),
+                            Container(padding: const EdgeInsets.all(8.0), alignment: Alignment.center, decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 2)), child: const Text("รายการ", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600))),
+                            Container(padding: const EdgeInsets.all(8.0), alignment: Alignment.center, decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 2)), child: const Text("แก้ไขรายการ", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600))),
+                            Container(padding: const EdgeInsets.all(8.0), alignment: Alignment.center, decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 2)), child: const Text("ลบรายการ", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600))),
+                          ]
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 17),
-                          child: Container(
-                            height: 437,
-                            width: 437,
-                            decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                image: AssetImage("assets/plan.png"),
-                                fit: BoxFit.cover,
-                              ),
-                              borderRadius: BorderRadius.circular(50.0)
-                            ),
-                            child: null
+                        TableRow(
+                          decoration: const BoxDecoration(
+                            color: Color.fromARGB(255, 30, 38, 57),
                           ),
+                          children: [
+                            Container(padding: const EdgeInsets.all(8.0), alignment: Alignment.center, decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 2)), child: const Text("1", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600))),
+                            Container(padding: const EdgeInsets.all(8.0), alignment: Alignment.center, decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 2)), child: const Text("14-10-2565", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600))),
+                            Container(padding: const EdgeInsets.all(8.0), alignment: Alignment.center, decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 2)), child: const Text("บันทึกหลังการสอน", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600))),
+                            Container(padding: const EdgeInsets.all(8.0), alignment: Alignment.center, decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 2)), child: Text("edit", style: TextStyle(color: Colors.green[300], fontSize: 20, fontWeight: FontWeight.w600))),
+                            Container(padding: const EdgeInsets.all(8.0), alignment: Alignment.center, decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 2)), child: Text("delete", style: TextStyle(color: Colors.red[400], fontSize: 20, fontWeight: FontWeight.w600))),
+                          ]
+                        ),
+                        TableRow(
+                          decoration: const BoxDecoration(
+                            color: Color.fromARGB(255, 30, 38, 57),
+                          ),
+                          children: [
+                            Container(padding: const EdgeInsets.all(8.0), alignment: Alignment.center, decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 2)), child: const Text("2", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600))),
+                            Container(padding: const EdgeInsets.all(8.0), alignment: Alignment.center, decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 2)), child: const Text("15-10-2565", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600))),
+                            Container(padding: const EdgeInsets.all(8.0), alignment: Alignment.center, decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 2)), child: const Text("บันทึกแผนการสอน", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600))),
+                            Container(padding: const EdgeInsets.all(8.0), alignment: Alignment.center, decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 2)), child: Text("edit", style: TextStyle(color: Colors.green[300], fontSize: 20, fontWeight: FontWeight.w600))),
+                            Container(padding: const EdgeInsets.all(8.0), alignment: Alignment.center, decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 2)), child: Text("delete", style: TextStyle(color: Colors.red[400], fontSize: 20, fontWeight: FontWeight.w600))),
+                          ]
                         ),
                       ],
-                    )
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
+          ] else if (_currentTools == 3) ... [
+            Container(
+              padding: const EdgeInsets.all(16.0),
+              alignment: Alignment.center,
+              child: Image.asset("assets/stupid_chart.png"),
+            ),
+          ],
 
+          ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           Container(
             margin: const EdgeInsets.only(top: 115),
             alignment: Alignment.center,
